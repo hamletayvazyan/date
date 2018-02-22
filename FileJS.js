@@ -34,7 +34,6 @@ function nextclick() {
             var correctMonth = res.indexOf(Month) + count1;
             console.log(correctMonth);
             months.html(res[correctMonth])
-
         })
     });
 }
