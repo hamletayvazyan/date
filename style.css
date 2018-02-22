@@ -32,8 +32,11 @@ body{
 }
 #matrix{
     display: inline-block;
-    margin-top: 30px;
     text-align: left;
+}
+#matr{
+    margin-top: 20px;
+    text-align: center;
 }
 .days {
     width: 50px;
