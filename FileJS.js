@@ -7,7 +7,6 @@ var weekName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 for (var h = 0; h < 7; h++){
     matr.append('<div class="week">'+weekName[h]+'</div>');
 }
-
 $(window).on('load', function () {
         $.ajax({
             type: "GET",
@@ -18,12 +17,10 @@ $(window).on('load', function () {
         }).done(function (response) {
             masiv = response;
             var asd = masiv.split(',');
-            console.log(asd);
             months.append(asd[0]);
             var tari = asd[0].split(' ');
             var nextear = parseInt(tari[1]);
             var day = parseInt(asd[1]);
-            console.log(day);
             $( document ).ready(function() {
                 $('#matr'+day+'').css('color', 'red');
                 $('#matr div').slice(-2).addClass("special");
@@ -37,7 +34,6 @@ $(window).on('load', function () {
             matrix.append(asd[2]);
             var count = asd[3];
             var asdf = parseInt(count);
-
             $('.next').on('click', function () {
                 asdf += 1;
                 if (asdf > 12){
@@ -55,7 +51,6 @@ $(window).on('load', function () {
                     masiv = [];
                     masiv = event;
                     var asd = masiv.split(',');
-                    console.log(asd);
                     months.html(asd[4]);
                     matrix.html(asd[5]);
                     $( document ).ready(function() {
@@ -85,7 +80,6 @@ $(window).on('load', function () {
                     masiv = [];
                     masiv = event;
                     var asd = masiv.split(',');
-                    console.log(asd);
                     months.html(asd[6]);
                     matrix.html(asd[7]);
                     $( document ).ready(function() {
@@ -100,8 +94,7 @@ $(window).on('load', function () {
                 })
             });
 
-
-
+            
         });
     }
 );
