@@ -2,7 +2,6 @@
 $Month = date('F');
 $tari = date('o', mktime(0, 0, 0, date('n'), 1));
 $Day = date("j");
-
 if(isset($_GET['load'])){
     print_r($Month);
     echo ' ';
@@ -11,7 +10,6 @@ if(isset($_GET['load'])){
 echo ',';
 echo $Day;
 echo ',';
-
 nkar();
 function nkar(){
     $count = 1;
@@ -48,7 +46,6 @@ function nkar(){
 }
 echo ',';
 echo date('n');
-
 echo ',';
 click();
 function click(){
@@ -61,7 +58,6 @@ function click(){
         $tari = $asdf;
     }
     $Month = date('F', mktime(0, 0, 0, $next, 1, $tari));
-
     print_r($Month);
     echo ' ';
     echo $tari;
@@ -123,7 +119,6 @@ function click(){
         }
     }
 }
-
 echo ',';
 clickprev();
 function clickprev(){
@@ -137,7 +132,6 @@ function clickprev(){
         $tari = $asd;
     }
     $Month = date('F', mktime(0, 0, 0, $prev, 1, $tari));
-
     print_r($Month);
     echo ' ';
     echo $tari;
@@ -145,12 +139,10 @@ function clickprev(){
     $count = 1;
     $cou = 1;
     $co = 1;
-
     $Days = date("t", mktime(0, 0, 0, $prev, 1, $tari));
     $countDay = $Days + 1;
     $positionDate = date("N", mktime(0, 0, 0, $prev, 1, $tari));
     $variable = $positionDate -1;
-
     if($variable == 6){
         for ($i = 0; $i < 6; $i++){
             echo '<div class="divs'.$co.'">';
