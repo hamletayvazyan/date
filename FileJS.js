@@ -3,69 +3,11 @@ var months = $('#Months');
 var matrix = $('#matrix');
 var matr = $('#matr');
 var masiv = [];
-var namesMonth = [];
 var weekName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 for (var h = 0; h < 7; h++){
     matr.append('<div class="week">'+weekName[h]+'</div>');
 }
-nextclick();
-function nextclick() {
-    var count = 0;
-    var count1 = 0;
-    $('.next').on('click', function () {
-        count += 1;
-        count1 += 1;
-        $.ajax({
-            type: 'GET',
-            url: 'datePhP.php',
-            data: {
-                next: count
-            }
-        }).done(function (event) {
-            masiv = [];
-            masiv = event;
-            var asd = masiv.split(',');
-            console.log(asd);
-            matrix.html(asd[4]);
-            namesMonth = asd[1];
-            var masiv1 = namesMonth.split(' ');
-            var res = masiv1.slice(0, 12);
-            var Month = asd[3];
-            var correctMonth = res.indexOf(Month) + count1;
-            console.log(correctMonth);
-            months.html(res[correctMonth])
-        })
-    });
-}
-prevclick();
 
-function prevclick() {
-    var count = 0;
-    var count1 = 0;
-    $('.prev').on('click', function () {
-        count += 1;
-        count1 += 1;
-        $.ajax({
-            type: 'GET',
-            url: 'datePhP.php',
-            data: {
-                prev: count
-            }
-        }).done(function (event) {
-            masiv = [];
-            masiv = event;
-            var asd = masiv.split(',');
-            console.log(asd);
-            matrix.html(asd[5]);
-            namesMonth = asd[1];
-            var masiv1 = namesMonth.split(' ');
-            var res = masiv1.slice(0, 12);
-            var Month = asd[3];
-            var correctMonth = res.indexOf(Month) - count1;
-            months.html(res[correctMonth])
-        })
-    });
-}
 $(window).on('load', function () {
         $.ajax({
             type: "GET",
@@ -78,7 +20,88 @@ $(window).on('load', function () {
             var asd = masiv.split(',');
             console.log(asd);
             months.append(asd[0]);
+            var tari = asd[0].split(' ');
+            var nextear = parseInt(tari[1]);
+            var day = parseInt(asd[1]);
+            console.log(day);
+            $( document ).ready(function() {
+                $('#matr'+day+'').css('color', 'red');
+                $('#matr div').slice(-2).addClass("special");
+                $('#matrix .divs1 div').slice(-2).addClass("special");
+                $('#matrix .divs2 div').slice(-2).addClass("special");
+                $('#matrix .divs3 div').slice(-2).addClass("special");
+                $('#matrix .divs4 div').slice(-2).addClass("special");
+                $('#matrix .divs5 div').slice(-2).addClass("special");
+                $('#matrix .divs6 div').slice(-2).addClass("special");
+            });
             matrix.append(asd[2]);
+            var count = asd[3];
+            var asdf = parseInt(count);
+
+            $('.next').on('click', function () {
+                asdf += 1;
+                if (asdf > 12){
+                    nextear += 1;
+                    asdf = 1;
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: 'datePhP.php',
+                    data: {
+                        next: asdf,
+                        nextyear: nextear
+                    }
+                }).done(function (event) {
+                    masiv = [];
+                    masiv = event;
+                    var asd = masiv.split(',');
+                    console.log(asd);
+                    months.html(asd[4]);
+                    matrix.html(asd[5]);
+                    $( document ).ready(function() {
+                        $('#matrix .divs1 div').slice(-2).addClass("special");
+                        $('#matrix .divs2 div').slice(-2).addClass("special");
+                        $('#matrix .divs3 div').slice(-2).addClass("special");
+                        $('#matrix .divs4 div').slice(-2).addClass("special");
+                        $('#matrix .divs5 div').slice(-2).addClass("special");
+                        $('#matrix .divs6 div').slice(-2).addClass("special");
+                    });
+                })
+            });
+            $('.prev').on('click', function () {
+                asdf -=1;
+                if(asdf == 0){
+                    nextear -= 1;
+                    asdf = 12;
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: 'datePhP.php',
+                    data: {
+                        prev: asdf,
+                        prevyear: nextear
+                    }
+                }).done(function (event) {
+                    masiv = [];
+                    masiv = event;
+                    var asd = masiv.split(',');
+                    console.log(asd);
+                    months.html(asd[6]);
+                    matrix.html(asd[7]);
+                    $( document ).ready(function() {
+                        $('#matrix .divs1 div').slice(-2).addClass("special");
+                        $('#matrix .divs2 div').slice(-2).addClass("special");
+                        $('#matrix .divs3 div').slice(-2).addClass("special");
+                        $('#matrix .divs4 div').slice(-2).addClass("special");
+                        $('#matrix .divs5 div').slice(-2).addClass("special");
+                        $('#matrix .divs6 div').slice(-2).addClass("special");
+                    });
+
+                })
+            });
+
+
+
         });
     }
 );
